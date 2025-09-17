@@ -10,30 +10,38 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 
-import '../../domain/entities/user_entity.dart' as _i2;
-import '../ui_models/user_ui_model.dart' as _i3;
+import '../data/models/todo_dto.dart' as _i2;
+import '../domain/entities/todo_entity.dart' as _i3;
+import '../presentation/ui_models/todo_ui_model.dart' as _i4;
 
-/// {@template package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+/// {@template package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
 /// Available mappings:
-/// - `UserEntity` → `UserUiModel`.
+/// - `TodoDto` → `TodoEntity`.
+/// - `TodoEntity` → `TodoUiModel`.
 /// {@endtemplate}
-class $UserMapper implements _i1.AutoMapprInterface {
-  const $UserMapper();
+class $TodoMapper implements _i1.AutoMapprInterface {
+  const $TodoMapper();
 
   Type _typeOf<T>() => T;
 
   List<_i1.AutoMapprInterface> get _delegates => const [];
 
   /// {@macro AutoMapprInterface:canConvert}
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   bool canConvert<SOURCE, TARGET>({bool recursive = true}) {
     final sourceTypeOf = _typeOf<SOURCE>();
     final targetTypeOf = _typeOf<TARGET>();
-    if ((sourceTypeOf == _typeOf<_i2.UserEntity>() ||
-            sourceTypeOf == _typeOf<_i2.UserEntity?>()) &&
-        (targetTypeOf == _typeOf<_i3.UserUiModel>() ||
-            targetTypeOf == _typeOf<_i3.UserUiModel?>())) {
+    if ((sourceTypeOf == _typeOf<_i2.TodoDto>() ||
+            sourceTypeOf == _typeOf<_i2.TodoDto?>()) &&
+        (targetTypeOf == _typeOf<_i3.TodoEntity>() ||
+            targetTypeOf == _typeOf<_i3.TodoEntity?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i3.TodoEntity>() ||
+            sourceTypeOf == _typeOf<_i3.TodoEntity?>()) &&
+        (targetTypeOf == _typeOf<_i4.TodoUiModel>() ||
+            targetTypeOf == _typeOf<_i4.TodoUiModel?>())) {
       return true;
     }
     if (recursive) {
@@ -47,7 +55,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convert}
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   TARGET convert<SOURCE, TARGET>(SOURCE? model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -63,7 +71,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:tryConvert}
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   TARGET? tryConvert<SOURCE, TARGET>(
     SOURCE? model, {
@@ -83,7 +91,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertIterable}
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   Iterable<TARGET> convertIterable<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -102,7 +110,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   Iterable<TARGET?> tryConvertIterable<SOURCE, TARGET>(
     Iterable<SOURCE?> model, {
@@ -124,7 +132,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertList}
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   List<TARGET> convertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -143,7 +151,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   List<TARGET?> tryConvertList<SOURCE, TARGET>(
     Iterable<SOURCE?> model, {
@@ -166,7 +174,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:convertSet}
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   Set<TARGET> convertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
@@ -185,7 +193,7 @@ class $UserMapper implements _i1.AutoMapprInterface {
   ///
   /// When an item in the source iterable is null, uses `whenSourceIsNull` if defined or null
   ///
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   Set<TARGET?> tryConvertSet<SOURCE, TARGET>(
     Iterable<SOURCE?> model, {
@@ -213,14 +221,24 @@ class $UserMapper implements _i1.AutoMapprInterface {
   }) {
     final sourceTypeOf = _typeOf<SOURCE>();
     final targetTypeOf = _typeOf<TARGET>();
-    if ((sourceTypeOf == _typeOf<_i2.UserEntity>() ||
-            sourceTypeOf == _typeOf<_i2.UserEntity?>()) &&
-        (targetTypeOf == _typeOf<_i3.UserUiModel>() ||
-            targetTypeOf == _typeOf<_i3.UserUiModel?>())) {
+    if ((sourceTypeOf == _typeOf<_i2.TodoDto>() ||
+            sourceTypeOf == _typeOf<_i2.TodoDto?>()) &&
+        (targetTypeOf == _typeOf<_i3.TodoEntity>() ||
+            targetTypeOf == _typeOf<_i3.TodoEntity?>())) {
       if (canReturnNull && model == null) {
         return null;
       }
-      return (_map__i2$UserEntity_To__i3$UserUiModel((model as _i2.UserEntity?))
+      return (_map__i2$TodoDto_To__i3$TodoEntity((model as _i2.TodoDto?))
+          as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i3.TodoEntity>() ||
+            sourceTypeOf == _typeOf<_i3.TodoEntity?>()) &&
+        (targetTypeOf == _typeOf<_i4.TodoUiModel>() ||
+            targetTypeOf == _typeOf<_i4.TodoUiModel?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i3$TodoEntity_To__i4$TodoUiModel((model as _i3.TodoEntity?))
           as TARGET);
     }
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
@@ -243,22 +261,41 @@ class $UserMapper implements _i1.AutoMapprInterface {
   }
 
   /// {@macro AutoMapprInterface:useSafeMapping}
-  /// {@macro package:mvvm_arch_v2/features/auth/presentation/mappers/user_mapper.dart}
+  /// {@macro package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart}
   @override
   bool useSafeMapping<SOURCE, TARGET>() {
     return false;
   }
 
-  _i3.UserUiModel _map__i2$UserEntity_To__i3$UserUiModel(
-    _i2.UserEntity? input,
+  _i3.TodoEntity _map__i2$TodoDto_To__i3$TodoEntity(_i2.TodoDto? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+        r'Mapping TodoDto → TodoEntity failed because TodoDto was null, and no default value was provided. '
+        r'Consider setting the whenSourceIsNull parameter on the MapType<TodoDto, TodoEntity> to handle null values during mapping.',
+      );
+    }
+    return _i3.TodoEntity(
+      id: model.id,
+      title: model.title,
+      completed: model.completed,
+    );
+  }
+
+  _i4.TodoUiModel _map__i3$TodoEntity_To__i4$TodoUiModel(
+    _i3.TodoEntity? input,
   ) {
     final model = input;
     if (model == null) {
       throw Exception(
-        r'Mapping UserEntity → UserUiModel failed because UserEntity was null, and no default value was provided. '
-        r'Consider setting the whenSourceIsNull parameter on the MapType<UserEntity, UserUiModel> to handle null values during mapping.',
+        r'Mapping TodoEntity → TodoUiModel failed because TodoEntity was null, and no default value was provided. '
+        r'Consider setting the whenSourceIsNull parameter on the MapType<TodoEntity, TodoUiModel> to handle null values during mapping.',
       );
     }
-    return _i3.UserUiModel(email: model.email, token: model.token);
+    return _i4.TodoUiModel(
+      id: model.id,
+      title: model.title,
+      completed: model.completed,
+    );
   }
 }

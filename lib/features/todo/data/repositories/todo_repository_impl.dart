@@ -4,8 +4,7 @@ import '../../domain/repositories/todo_repository.dart';
 import '../datasources/todo_remote_datasource.dart';
 import '../models/todo_dto.dart';
 import '../../../../core/error/failure.dart';
-import 'package:auto_mappr_annotation/auto_mappr_annotation.dart';
-import '../../presentation/mappers/todo_mapper.dart';
+import '../../mappers/todo_mapper.dart';
 
 class TodoRepositoryImpl extends TodoRepository {
   final TodoRemoteDatasource remoteDatasource;

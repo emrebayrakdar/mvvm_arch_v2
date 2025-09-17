@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/usecases/get_todos_usecase.dart';
 import '../../domain/entities/todo_entity.dart';
-import '../../../../core/error/failure.dart';
+// import '../../../../core/error/failure.dart';
 
 abstract class TodoEvent {}
 

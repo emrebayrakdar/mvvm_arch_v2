@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import '../models/todo_dto.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class TodoRemoteDatasource {
   final Dio dio;
   TodoRemoteDatasource(this.dio);

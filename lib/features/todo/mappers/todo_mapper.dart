@@ -3,9 +3,8 @@ import 'package:mvvm_arch_v2/features/todo/data/models/todo_dto.dart';
 import 'package:mvvm_arch_v2/features/todo/domain/entities/todo_entity.dart';
 import 'package:mvvm_arch_v2/features/todo/presentation/ui_models/todo_ui_model.dart';
 import 'todo_mapper.auto_mappr.dart';
+import 'package:injectable/injectable.dart';
 
-@AutoMappr([
-  MapType<TodoDto, TodoEntity>(),
-  MapType<TodoEntity, TodoUiModel>(),
-])
+@AutoMappr([MapType<TodoDto, TodoEntity>(), MapType<TodoEntity, TodoUiModel>()])
+@lazySingleton
 class TodoMapper extends $TodoMapper {}

@@ -5,7 +5,9 @@ import '../datasources/todo_remote_datasource.dart';
 import '../models/todo_dto.dart';
 import '../../../../core/error/failure.dart';
 import '../../mappers/todo_mapper.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: TodoRepository)
 class TodoRepositoryImpl extends TodoRepository {
   final TodoRemoteDatasource remoteDatasource;
   final TodoMapper mapper;
@@ -16,7 +18,7 @@ class TodoRepositoryImpl extends TodoRepository {
   Future<Either<Failure, List<TodoEntity>>> getTodos() async {
     try {
       final dtos = await remoteDatasource.fetchTodos();
-      final entities = dtos
+      List<TodoEntity> entities = dtos
           .map((dto) => mapper.convert<TodoDto, TodoEntity>(dto))
           .toList();
       return Right(entities);

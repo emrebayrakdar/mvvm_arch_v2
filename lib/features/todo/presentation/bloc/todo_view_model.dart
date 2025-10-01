@@ -1,23 +1,24 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_arch_v2/core/di/injection.dart';
+import 'package:mvvm_arch_v2/features/todo/domain/entities/todo_entity.dart';
 import '../../domain/usecases/get_todos_usecase.dart';
 import 'todo_event.dart';
 import 'todo_state.dart';
-import '../../domain/entities/todo_entity.dart';
 import '../ui_models/todo_ui_model.dart';
 import '../../mappers/todo_mapper.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class TodoBloc extends Bloc<TodoEvent, TodoState> {
+class TodoViewModel extends Bloc<TodoEvent, TodoState> {
   final GetTodosUseCase getTodosUseCase;
   final TodoMapper mapper;
 
-  final List<TodoEntity> _cache = [];
+  final List<TodoUiModel> _cache = [];
 
-final tmpGetTodosUseCase = getIt<GetTodosUseCase>();
+  final tmpGetTodosUseCase = getIt<GetTodosUseCase>();
 
-  TodoBloc(this.getTodosUseCase, this.mapper) : super(const TodoInitial()) {
+  TodoViewModel(this.getTodosUseCase, this.mapper)
+    : super(const TodoInitial()) {
     on<LoadTodosEvent>(_onLoadTodos);
     on<AddTodoEvent>(_onAddTodo);
     on<ToggleTodoEvent>(_onToggleTodo);
@@ -28,19 +29,22 @@ final tmpGetTodosUseCase = getIt<GetTodosUseCase>();
     LoadTodosEvent event,
     Emitter<TodoState> emit,
   ) async {
-    
     emit(const TodoLoading());
     final result = await getTodosUseCase(NoParams());
+    
     result.fold((failure) => emit(TodoError(failure.message)), (todos) {
+      final uiModels = todos
+          .map((entity) => mapper.convert<TodoEntity, TodoUiModel>(entity))
+          .toList();
       _cache
         ..clear()
-        ..addAll(todos);
+        ..addAll(uiModels);
       emit(_emitUi());
     });
   }
 
   void _onAddTodo(AddTodoEvent event, Emitter<TodoState> emit) {
-    final newTodo = TodoEntity(
+    final newTodo = TodoUiModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: event.title,
       completed: false,
@@ -64,9 +68,6 @@ final tmpGetTodosUseCase = getIt<GetTodosUseCase>();
   }
 
   TodoLoaded _emitUi() {
-    final uiList = _cache
-        .map((e) => mapper.convert<TodoEntity, TodoUiModel>(e))
-        .toList(growable: false);
-    return TodoLoaded(List.unmodifiable(uiList));
+    return TodoLoaded(List.unmodifiable(_cache));
   }
 }

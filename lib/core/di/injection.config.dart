@@ -22,7 +22,7 @@ import 'package:mvvm_arch_v2/features/todo/domain/repositories/todo_repository.d
 import 'package:mvvm_arch_v2/features/todo/domain/usecases/get_todos_usecase.dart'
     as _i758;
 import 'package:mvvm_arch_v2/features/todo/mappers/todo_mapper.dart' as _i686;
-import 'package:mvvm_arch_v2/features/todo/presentation/bloc/todo_bloc.dart'
+import 'package:mvvm_arch_v2/features/todo/presentation/bloc/todo_view_model.dart'
     as _i538;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -47,8 +47,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i758.GetTodosUseCase>(
       () => _i758.GetTodosUseCase(gh<_i183.TodoRepository>()),
     );
-    gh.factory<_i538.TodoBloc>(
-      () => _i538.TodoBloc(gh<_i758.GetTodosUseCase>(), gh<_i686.TodoMapper>()),
+    gh.factory<_i538.TodoViewModel>(
+      () => _i538.TodoViewModel(
+        gh<_i758.GetTodosUseCase>(),
+        gh<_i686.TodoMapper>(),
+      ),
     );
     return this;
   }

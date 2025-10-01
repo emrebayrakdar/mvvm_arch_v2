@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mvvm_arch_v2/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:mvvm_arch_v2/features/todo/presentation/bloc/todo_view_model.dart';
 import 'package:mvvm_arch_v2/features/todo/presentation/bloc/todo_event.dart';
 import 'package:mvvm_arch_v2/features/todo/presentation/bloc/todo_state.dart';
 import 'package:mvvm_arch_v2/features/todo/presentation/ui_models/todo_ui_model.dart';
 
-class TodoPage extends StatefulWidget {
-  const TodoPage({super.key});
+class TodoView extends StatefulWidget {
+  const TodoView({super.key});
 
   @override
-  State<TodoPage> createState() => _TodoPageState();
+  State<TodoView> createState() => _TodoPageState();
 }
 
-class _TodoPageState extends State<TodoPage> {
+class _TodoPageState extends State<TodoView> {
   final _controller = TextEditingController();
 
   @override
@@ -24,7 +24,7 @@ class _TodoPageState extends State<TodoPage> {
   void _add() {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
-    context.read<TodoBloc>().add(AddTodoEvent(text));
+    context.read<TodoViewModel>().add(AddTodoEvent(text));
     _controller.clear();
   }
 
@@ -54,7 +54,7 @@ class _TodoPageState extends State<TodoPage> {
             ),
           ),
           Expanded(
-            child: BlocBuilder<TodoBloc, TodoState>(
+            child: BlocBuilder<TodoViewModel, TodoState>(
               builder: (context, state) {
                 if (state is TodoLoading) {
                   return const Center(child: CircularProgressIndicator());
@@ -75,21 +75,21 @@ class _TodoPageState extends State<TodoPage> {
                       return Dismissible(
                         key: ValueKey(todo.id),
                         background: Container(
-                          color: Colors.red.shade400,
+                          color: const Color.fromARGB(255, 255, 83, 80),
                           alignment: Alignment.centerRight,
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: const Icon(Icons.delete, color: Colors.white),
                         ),
                         direction: DismissDirection.endToStart,
                         onDismissed: (_) {
-                          context.read<TodoBloc>().add(
+                          context.read<TodoViewModel>().add(
                             DeleteTodoEvent(todo.id),
                           );
                         },
                         child: ListTile(
                           leading: Checkbox(
                             value: todo.completed,
-                            onChanged: (_) => context.read<TodoBloc>().add(
+                            onChanged: (_) => context.read<TodoViewModel>().add(
                               ToggleTodoEvent(todo.id),
                             ),
                           ),
@@ -106,7 +106,7 @@ class _TodoPageState extends State<TodoPage> {
                           ),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete_outline),
-                            onPressed: () => context.read<TodoBloc>().add(
+                            onPressed: () => context.read<TodoViewModel>().add(
                               DeleteTodoEvent(todo.id),
                             ),
                           ),
